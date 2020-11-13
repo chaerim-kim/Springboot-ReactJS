@@ -1,0 +1,85 @@
+version: "3.7"
+
+# Define services
+services:
+
+  # The Back end SpringBoot Application
+  workspace:
+    build:
+      context: ../visual-vcdb-server
+      #      dockerfile: ../server
+      target: build
+    #      Start the container but don't do anything
+    entrypoint: ["tail", "-f", "/dev/null"]
+    env_file:
+      - ../visual-vcdb-server/server.env
+    environment:
+      ARTIFACT_NAME: "visual-vcdb-server-0.0.1-SNAPSHOT.jar"
+      ## Overwrite current profile when in development environment
+      SPRING_PROFILES_ACTIVE: ${SERVER_SPRING_PROFILES_ACTIVE}
+      SERVER_PORT: ${SERVER_HOST_PORT}
+      FLYWAY_CONFIG_FILES: flyway.conf
+      ## Remote Debug info
+      JPDA_ADDRESS: "8000"
+      JPDA_TRANSPORT: "dt_socket"
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+      JPDA_OPTS: "-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+    depends_on:
+      - postgres
+    expose:
+      - ${SERVER_CONTAINER_PORT}
+      ## Port available to other services
+    ports:
+      - "${SERVER_CONTAINER_PORT}:${SERVER_HOST_PORT}"
+      - "5005:5005"
+    networks:
+      - server-side
+      - front-end
+    volumes:
+      - ${SERVER_HOST_CODE_PATH}:/app # TODO: mount logs
+      - ~/.m2:/root/.m2
+
+# PostgreSQL DB for the application
+  postgres:
+    shm_size: '256MB'
+    build:
+      context: ../db
+    #      dockerfile: ../db
+    networks:
+      - server-side
+    env_file:
+      - ../db/db.env
+    environment:
+      PGDATA: ${DB_CONTAINER_DATA_PATH}
+    ports:
+      - "${DB_CONTAINER_PORT}:${DB_HOST_PORT}"
+    expose:
+      - ${DB_CONTAINER_PORT}
+    volumes:
+      - ${DB_HOST_DATA_PATH}:${DB_CONTAINER_DATA_PATH}
+
+  # Frontend application
+  frontend:
+    build:
+      context: ../frontend
+      target: build
+    networks:
+      - front-end
+    entrypoint: ["tail", "-f", "/dev/null"]
+    env_file:
+      - ../frontend/frontend.env
+    depends_on:
+      - workspace
+    environment:
+      HTTPSERVER_PORT: ${FRONTEND_CONTAINER_PORT}
+    ports:
+      - "${FRONTEND_CONTAINER_PORT}:${FRONTEND_HOST_PORT}"
+    volumes:
+      - ../frontend/app/:/app/
+      - /app/node_modules
+
+networks:
+  front-end:
+  server-side:
+volumes:
+  db-data:
