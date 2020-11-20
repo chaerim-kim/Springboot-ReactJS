@@ -9,13 +9,13 @@ import java.util.Date;
 
 @Entity
 public class User {
-    @CreationTimestamp
-    @Column(name = "createdat")
-    private Date created_at;
-
-    @UpdateTimestamp
-    @Column(name = "updatedat")
-    private Date updated_at;
+//    @CreationTimestamp
+//    @Column(name = "createdat")
+//    private Date created_at;
+//
+//    @UpdateTimestamp
+//    @Column(name = "updatedat")
+//    private Date updated_at;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,16 +27,9 @@ public class User {
     @Column(name = "surname")
     private String surName;
 
-//    public Pet getPet() {
-//        return pet;
-//    }
-//
-//    public void setPet(Pet pet) {
-//        this.pet = pet;
-//    }
 
-//    @OneToMany (mappedBy = "user", fetch = FetchType.LAZY)
-//    private Pet pet;
+    @Column(name = "emailid")
+    private String emailId;
 
     public Long getId() {
         return id;
@@ -61,6 +54,15 @@ public class User {
     public void setSurName(String surName) {
         this.surName = surName;
     }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
 
 
 }
