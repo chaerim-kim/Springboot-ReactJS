@@ -1,6 +1,8 @@
 package uk.fyp.visualvcdbserver.Controller;
 
 
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +46,14 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
+
+    // get user by ID
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(("User with id " +id+ " does not exist")));
+        return ResponseEntity.ok(user);
+    }
+
+
 
 }
