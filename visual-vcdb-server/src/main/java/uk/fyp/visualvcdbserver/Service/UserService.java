@@ -10,6 +10,5 @@ public interface UserService {
     // User is a class name
     public List<User> findUsers();
 
-//    User getByID(Long id);
 
 }
