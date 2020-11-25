@@ -1,6 +1,7 @@
 package uk.fyp.visualvcdbserver.Controller;
 
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uk.fyp.visualvcdbserver.Model.User;
@@ -13,7 +14,7 @@ import java.util.List;
 
 // declaring URIs
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")     //allow the frontend to access the backend app
 public class UserController {
 
     // declare the service to call
