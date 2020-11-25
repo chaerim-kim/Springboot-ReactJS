@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import ListUserComponent from './components/ListUserComponent';
 import HeaderComponents from './components/HeaderComponents';
 import FooterComponents from './components/FooterComponents';
-
+import CreateUserComponent from './components/CreateUserComponent';
 
 function App() {
   return (
@@ -15,10 +15,9 @@ function App() {
             <div className="container">
               {/* redirections to diff pages */}
               <Switch> 
-                <Route path = "/" component = {ListUserComponent}></Route>
+                <Route path = "/" exact component = {ListUserComponent}></Route>
                 <Route path = "/users" component = {ListUserComponent}></Route>
-
-                    <ListUserComponent/>
+                <Route path = "/add_user" component = {CreateUserComponent}></Route>
                </Switch>
             </div>
 

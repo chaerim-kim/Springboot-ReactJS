@@ -7,21 +7,34 @@ class ListUserComponent extends Component {
 
     this.state = {
       users: []
-
     }
+    // bind the unction
+    this.addUser = this.addUser.bind(this);
   }
+  
 
   // updating the data into the table - using getUsers
   componentDidMount() {
     UserService.getUsers().then((res) => {
       this.setState({ users: res.data });
     });
-
   }
+
+
+  addUser(){
+    // react router in App.js made a history obj, router passes history obj to each router as a props
+    this.props.history.push('/add_user');
+  }
+
+
   render() {
     return (
       <div>
         <h2 className="text-center"> User List</h2>
+
+        <div className="row">
+          <button className="btn btn-primary" onClick={this.addUser}> Add User </button>
+        </div>
         <div className="row">
           <table className="table table-striped table-bordered">
             <thead>
