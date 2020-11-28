@@ -10,8 +10,9 @@ class ListUserComponent extends Component {
     }
     // bind the unction
     this.addUser = this.addUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
-  
+
 
   // updating the data into the table - using getUsers
   componentDidMount() {
@@ -21,9 +22,15 @@ class ListUserComponent extends Component {
   }
 
 
-  addUser(){
+  addUser() {
     // react router in App.js made a history obj, router passes history obj to each router as a props
     this.props.history.push('/add_user');
+  }
+
+
+  // redirect to user
+  updateUser(id) {
+    this.props.history.push(`/update_user/${id}`);
   }
 
 
@@ -33,8 +40,11 @@ class ListUserComponent extends Component {
         <h2 className="text-center"> User List</h2>
 
         <div className="row">
-          <button className="btn btn-primary" onClick={this.addUser}> Add User </button>
+          <div class="column">
+            <button className="btn btn-primary" onClick={this.addUser}> Add User </button>
+          </div>
         </div>
+
         <div className="row">
           <table className="table table-striped table-bordered">
             <thead>
@@ -54,6 +64,10 @@ class ListUserComponent extends Component {
                       <td>{user.firstName}</td>
                       <td>{user.surName}</td>
                       <td>{user.emailId}</td>
+                      <td>
+                        <button className="btn btn-info" onClick={ ()=> this.updateUser(user.id)}> Update </button>
+                
+                      </td>
                     </tr>
                 )
               }

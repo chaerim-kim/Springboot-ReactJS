@@ -5,6 +5,7 @@ import ListUserComponent from './components/ListUserComponent';
 import HeaderComponents from './components/HeaderComponents';
 import FooterComponents from './components/FooterComponents';
 import CreateUserComponent from './components/CreateUserComponent';
+import UpdateUserComponent from './components/UpdateUserComponent';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path = "/" exact component = {ListUserComponent}></Route>
                 <Route path = "/users" component = {ListUserComponent}></Route>
                 <Route path = "/add_user" component = {CreateUserComponent}></Route>
+                <Route path = "/update_user/:id" component = {UpdateUserComponent}></Route>
                </Switch>
             </div>
 
