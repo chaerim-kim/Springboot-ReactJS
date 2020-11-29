@@ -6,6 +6,7 @@ import HeaderComponents from './components/HeaderComponents';
 import FooterComponents from './components/FooterComponents';
 import CreateUserComponent from './components/CreateUserComponent';
 import UpdateUserComponent from './components/UpdateUserComponent';
+// import DeleteUserComponent from './components/DeleteUserComponent';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path = "/users" component = {ListUserComponent}></Route>
                 <Route path = "/add_user" component = {CreateUserComponent}></Route>
                 <Route path = "/update_user/:id" component = {UpdateUserComponent}></Route>
+                {/* <Route path = "/delete_user/:id" component = {DeleteUserComponent}></Route> */}
                </Switch>
             </div>
 

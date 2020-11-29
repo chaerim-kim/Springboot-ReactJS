@@ -29,11 +29,16 @@ class UpdateUserComponent extends Component {
         });
     }
 
-    // called when user hit the button 
+    // called when user hit the button - currently only updates the 
     updateUser = (e) => {
         e.preventDefault();
+        // this user obj that we send in the userservice.js
         let user = {firstName: this.state.firstName, surName: this.state.surName, emailId: this.state.emailId};
         console.log('employee => ' + JSON.stringify(user)); 
+        UserService.updateUser(user, this.state.id).then(res =>{
+            //once updates, redirect
+            this.props.history.push('/users');
+        });
     }
 
     //make a rest api call

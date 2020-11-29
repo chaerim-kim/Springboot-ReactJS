@@ -8,9 +8,10 @@ class ListUserComponent extends Component {
     this.state = {
       users: []
     }
-    // bind the unction
+    // bind the function
     this.addUser = this.addUser.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
 
@@ -32,6 +33,13 @@ class ListUserComponent extends Component {
   updateUser(id) {
     this.props.history.push(`/update_user/${id}`);
   }
+
+  deleteUser(id){
+    UserService.deleteUser(id).then( res => {
+      this.setState({users: this.state.users.filter(user => user.id !== id )});
+    });
+  }
+
 
 
   render() {
@@ -66,7 +74,7 @@ class ListUserComponent extends Component {
                       <td>{user.emailId}</td>
                       <td>
                         <button className="btn btn-info" onClick={ ()=> this.updateUser(user.id)}> Update </button>
-                
+                        <button style = {{marginLeft : "10px"}} className="btn btn-danger" onClick={ ()=> this.deleteUser(user.id)}> Delete </button>
                       </td>
                     </tr>
                 )
