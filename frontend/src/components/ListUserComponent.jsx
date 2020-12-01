@@ -12,6 +12,7 @@ class ListUserComponent extends Component {
     this.addUser = this.addUser.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.viewUser = this.viewUser.bind(this);
   }
 
 
@@ -28,8 +29,7 @@ class ListUserComponent extends Component {
     this.props.history.push('/add_user');
   }
 
-
-  // redirect to user
+  // redirect to user section
   updateUser(id) {
     this.props.history.push(`/update_user/${id}`);
   }
@@ -40,6 +40,10 @@ class ListUserComponent extends Component {
     });
   }
 
+  // redirect to view section
+  viewUser(id) {
+    this.props.history.push(`/view_user/${id}`);
+  }
 
 
   render() {
@@ -75,6 +79,7 @@ class ListUserComponent extends Component {
                       <td>
                         <button className="btn btn-info" onClick={ ()=> this.updateUser(user.id)}> Update </button>
                         <button style = {{marginLeft : "10px"}} className="btn btn-danger" onClick={ ()=> this.deleteUser(user.id)}> Delete </button>
+                        <button style = {{marginLeft : "10px"}} className="btn btn-info" onClick={ ()=> this.viewUser(user.id)}> View </button>
                       </td>
                     </tr>
                 )
