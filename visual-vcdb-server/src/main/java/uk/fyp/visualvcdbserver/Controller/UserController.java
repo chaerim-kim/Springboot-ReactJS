@@ -10,7 +10,9 @@ import uk.fyp.visualvcdbserver.Model.User;
 import uk.fyp.visualvcdbserver.Repository.UserRepository;
 import uk.fyp.visualvcdbserver.Service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //service calls repository and controller calls service
 
@@ -52,6 +54,36 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Long id){
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(("User with id " +id+ " does not exist")));
         return ResponseEntity.ok(user);
+    }
+
+
+    //update employee rest api
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails){
+        // check the user and if dont exist, throw exception
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(("User with id " +id+ " does not exist")));
+
+        user.setFirstName(userDetails.getFirstName());
+        user.setSurName(userDetails.getSurName());
+        user.setEmailId(userDetails.getEmailId());
+
+        // we return this to the client
+        User updatedUser = userRepository.save(user);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    //delete user rest api
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity <Map<String, Boolean>> deleteUser(@PathVariable Long id){
+        // find the user with the id
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(("User with id " +id+ " does not exist")));
+
+        // delete the user
+        userRepository.delete(user);
+        Map<String, Boolean> response = new HashMap<>();
+        // mark as true
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
 
 
