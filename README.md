@@ -1,49 +1,66 @@
 # Springboot-ReactJS
-> A Springboot-React application that implements an Employee control system.  
-> 스프링부트, 리액트 프레임워크를 사용한 종업원 관리 시스템
+> 🌱 A full-stack Springboot-React web application that implements a User control system
+
+A Full-Stack user control system focusing on basic functionalities implemented with Springboot for backend, React for frontend and PostgreSQL for the database engine.
 
 
 ## 🎨 Features / 주요 기능
-- List employee
-- Create employee
-- Update employee
-- Delete employee
+- The application performs the following CRUD RESTful APIs:
+  - [x] Create user
+  - [x] List user
+  - [x] Update user
+  - [x] Delete user
+- Uses docker for containerisation.
 
+
+
+## ➰ Project Duration
+October 2020 - November 2020
 
 
 ## 🐾 Examples / 사용 예제
+1. Create User
+![create](https://user-images.githubusercontent.com/33334078/100756706-d87bd200-3430-11eb-83fb-07c77475fb25.gif)
 
-스크린 샷과 코드 예제를 통해 사용 방법을 자세히 설명합니다.
+2. List User
+![view](https://user-images.githubusercontent.com/33334078/100756811-f47f7380-3430-11eb-872a-51ea46bf1b70.gif)
 
+3. Update User
+![update](https://user-images.githubusercontent.com/33334078/100756806-f34e4680-3430-11eb-865b-414338a54c77.gif)
+
+4. Delete User
+![delete](https://user-images.githubusercontent.com/33334078/100756787-ee899280-3430-11eb-80d0-3b0bf67f4c64.gif)
 
 
 ## 📚 Stack / 개발 환경
-- [Springboot](#https://spring.io) - The backend application
-- [PostgreSQL](#https://www.postgresql.org) - The Database
-- [ReactJS](#http://reactjs.org) - The Frontend application
-- [Docker](#www.docker.com) - The container for the application
 - Java
+- [Springboot](#https://spring.io) - A Java-based framework used to create a micro Service - used to build stand-alone and production ready spring applications.
+- [PostgreSQL](#https://www.postgresql.org) - A relational database management system emphasizing extensibility and SQL compliance.
+- [ReactJS](#http://reactjs.org) - A JavaScript library for building user interfaces or UI components.
+- [Docker](#www.docker.com) - The container for the application
+
 
 ## Installation / 실행 방법
 
 
-### 1. Docker Setup
+#### 1. Docker Setup
 ```sh
 git clone https://github.com/chaerim-kim/Springboot-ReactJS.git
 
 cd Springboot-ReactJS
 
 docker-compose up -d workspace postgres frontend
-```
 
-### 2. Build and Run the Springboot App with Maven
-```sh
 docker-compose exec workspace bash
 
+```
+
+#### 2. Build and Run the Springboot App with Maven
+```sh
 ./mvnw spring-boot:run
 ```
 
-### 3. Build and Run the React Frontend App
+#### 3. Build and Run the React Frontend App
 ```sh
 cd frontend
 
